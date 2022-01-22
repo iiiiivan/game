@@ -5,50 +5,71 @@ by Ivan
 
 ![game](vid_small.gif)
 
+## Introduction
+
+
+Introduce your game here.
+
+- How do you play it?
+
+    Use {W,A,S,D} to move and click mouse to shoot.
+
+- What does the player do?
+
+    You need to evade enemy's bullet and shoot the enemies.
+
+- What do the enemies do?
+
+    Enemies will shoot you.
+
+- How do you win?
+
+    Kill the boss in time then you win.
+
+- How do you lose?
+
+    If your health is zero then you lose.
+
+
+---
+
+## Implementation Details
+
+- Which programming language/ tools did you use?
+
+    I used Python and Pycat (a python game library) to make this game.
+    From pycat I use the ``Color``, ``KeyCode``, ``Sprite``, ``Window``, ``Scheduler``, and ``Label`` classes.
+    I also use randint from the random module
+
+- Which programming concepts did you use and how?
+
+    I use inheritance, iteration, lists, conditionals, variables, functions, etc.
+
+- What were some of the problems you faced and how did you solve them?
+
+    THe code below shoots a bullet at the enemy closest to the player.
+
+    ``` Python
+    if window.is_key_down(KeyCode.SPACE):
+        enemy=window.get_sprites_with_tag('enemy')
+        bullet=window.create_sprite(Bullet)
+        min_d=1000000000
+        for e in enemy:
+            d=self.distance_to(e.position)
+            if d<min_d:
+                min_d=d
+                bullet.point_toward_sprite(e)
+    ```
+
+---
+
+## Game Design
+
+- What makes it challenging?
+
+    You need to evade lot of enemy's bullet
 ---
 
 ## Code
 
-### The Enemy Class
-
-``` python
-class Enemy(Sprite):
-    
-    def on_create(self):
-        self.scale=30
-        self.goto_random_position()
-        self.time=0
-        self.rotation=randint(0, 360)
-        self.color=Color(255, 234, 0)
-        self.add_tag('enemy')
-        self.health = 5
-        self.enemyhealth = window.create_label()
-        self.enemyhealth.text = "enemy health = "+ str(self.health)
-        self.enemyhealth.font_size=11
-        self.enemyhealth.x=self.x-self.width/2
-        self.enemyhealth.y=self.y-self.height/2
-
-    def on_update(self, dt):
-        self.move_forward(3)
-        if self.is_touching_any_sprite_with_tag('barrier'):
-            self.delete()
-        if self.is_touching_any_sprite_with_tag('bullet'):
-            self.health-=1
-        if self.is_touching_window_edge():
-            self.delete()
-        self.time+=dt
-        if self.time>0.5:
-            b=window.create_sprite(EnemyBullet)
-            b.position=self.position
-            b.point_toward_sprite(player)
-            self.time=0
-        self.enemyhealth.x=self.x-self.width/2
-        self.enemyhealth.y=self.y-self.height/2
-        self.enemyhealth.text = "enemy health = "+ str(self.health)
-        if self.health<=0:
-            self.delete()
-
-    def delete(self):
-        self.enemyhealth.delete()
-        return super().delete()
-```
+A link to the [code](https://github.com/iiiiivan/python-class-0/blob/main/L14/l14.py)
