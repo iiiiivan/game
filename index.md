@@ -47,9 +47,9 @@ Introduce your game here.
 
 - What were some of the problems you faced and how did you solve them?
 
-    THe code below shoots a bullet at the enemy closest to the player.
+    The code below shoots a bullet at the enemy closest to the player.
 
-    ``` Python
+    ``` python
     if window.is_key_down(KeyCode.SPACE):
         enemy=window.get_sprites_with_tag('enemy')
         bullet=window.create_sprite(Bullet)
@@ -68,6 +68,7 @@ Introduce your game here.
 - What makes it challenging?
 
     You need to evade lot of enemy's bullet
+
 ---
 
 ## Code
